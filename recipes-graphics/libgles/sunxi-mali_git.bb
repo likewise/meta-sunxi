@@ -23,8 +23,9 @@ S = "${WORKDIR}/git"
 
 DEPENDS = "libdrm dri2proto libump"
 
-PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}"
-PACKAGECONFIG[wayland] = "EGL_TYPE=framebuffer,,,"
+# select EGL_TYPE=x11 for x11, EGL_TYPE=framebuffer for wayland or neither x11/wayland
+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', 'framebuffer', d)}"
+PACKAGECONFIG[framebuffer] = "EGL_TYPE=framebuffer,,,"
 PACKAGECONFIG[x11] = "EGL_TYPE=x11,,virtual/libx11 libxau libxdmcp libdri2,"
 
 # Inhibit warnings about files being stripped, we can't do anything about it.
