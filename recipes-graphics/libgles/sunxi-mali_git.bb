@@ -34,7 +34,7 @@ INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_SYSROOT_STRIP = "1"
 
 do_configure() {
-         DESTDIR=${D}/ VERSION=r3p0 ABI=armhf make ${EXTRA_OEMAKE} config
+         DESTDIR=${D}/ VERSION=r3p0 ABI=armhf make ${EXTRA_OECONF} config
 }
 
 do_install() {
